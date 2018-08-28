@@ -31,6 +31,8 @@ public class Welcome extends HttpServlet{
 		req.setAttribute("helloworld", helloworld);
 		req.setAttribute("location", "welcome");
 
+		System.out.println("studid"+req.getParameter("studid"));
+
 		ServletContext sc = getServletContext();
 		RequestDispatcher rd = sc.getRequestDispatcher("/WEB-INF/jsp/studentList.jsp");
 		rd.forward(req, resp);

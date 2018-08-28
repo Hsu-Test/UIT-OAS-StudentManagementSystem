@@ -118,10 +118,19 @@ System.out.println("JSP"+result);
 
                 <c:forEach var="body" items="${data}">
                         <td style="width: 120px;">${body.value}</td>
+
+
                 </c:forEach>
-                <td><form id="edit"><input type="button" value="Edit" onclick="edit()"></form><form id="delete"><input type="button" value="Delete" onclick="deleteStud()"></form></td>
+                <td>
+                <form id="edit"><input type="button" value="Edit" onclick="edit(${data.SID})">
+                <input type="hidden" id="studid1" name="studidEdit" value=""/>
+                </form>
+                <form id="delete"><input type="button" value="Delete" onclick="deleteStud(${data.SID})">
+                <input type="hidden" id="studid2" name="studidDelete" value=""/></form></td>
+
+
                     </tr>
-                    <tr></tr>
+                    <tr></tr><tr>
 </c:if>
 
 
@@ -206,19 +215,30 @@ search_key_function();
     	form.method="get";
     	form.action='add.do';
     	form.submit();
+    	location.replace('/StudentManagement/welcome.do');
+    	exit();
     }
-    function edit(){
+    function edit(a){
     	alert("edit");
+    	document.getElementById('studid1').value=a;
+    	document.getElementById('studid1').innerHTML=a;
+
     	var form = document.getElementById('edit');
-    	form.method="post";
-    	form.action='edit.do';
+    	//form.
+    	form.method="get";
+    	form.action='Edit.do';
     	form.submit();
     }
     function deleteStud(){
     	alert("delete");
+
+
+    	document.getElementById('studid2').value=a;
+    	document.getElementById('studid2').innerHTML=a;
+
     	var form = document.getElementById('delete');
     	form.method="get";
-    	form.action='delete.do';
+    	form.action='welcome.do';
     	form.submit();
     }
 

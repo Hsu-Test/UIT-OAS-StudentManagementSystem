@@ -33,9 +33,70 @@ public class StudentListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//super.doGet(req, resp);
 
-	    ServletContext sc = getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/WEB-INF/jsp/studentList.jsp");
-		rd.forward(req, resp);
+		String loc = (String)req.getParameter("location");
+
+
+		List<Map<String, String>> results = new ArrayList<Map<String, String>>();
+
+    	System.out.println("showALL");
+		  // do 'B' stuff
+	SQL = "SELECT * FROM STUDENTS";
+			//showList();
+    req.setCharacterEncoding("UTF-8");
+     		      try {
+		          Class.forName("org.h2.Driver");
+		      } catch (ClassNotFoundException e) {
+		          e.printStackTrace();
+		          throw new DatabaseException(e.getMessage());
+		      }
+		      System.out.println(results.size());
+
+    try (
+    	Connection conn = DriverManager.getConnection(URL, "demo", "demo");
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(SQL);) {
+    		int i=1;
+          while (rs.next()) {
+        	  String j=Integer.toString(i);
+              results.add(new LinkedHashMap<String, String>() {
+                  {
+                      put("#",j);
+                      put("SID", rs.getString(1));
+                      put("Name", rs.getString(2));
+                      put("Address", rs.getString(3));
+                      put("PhoneNo.", rs.getString(4));
+                      put("Academic Year.", rs.getString(5));
+                      put("Major.", rs.getString(6));
+                      put("Email.", rs.getString(7));
+                      put("Date of Birth.", rs.getString(8));
+                      put("Gender.", rs.getString(9));
+                      put("Father's Name.", rs.getString(10));
+                      put("NRC", rs.getString(11));
+
+                  }
+              });
+              i++;
+          }
+          System.out.println(results.size());
+
+	}catch (SQLException e) {
+          e.printStackTrace();
+          throw new DatabaseException(e.getMessage());
+      }
+
+    resp.setCharacterEncoding("UTF-8");
+    req.setAttribute("location",loc);
+    resp.setCharacterEncoding("UTF-8");
+    req.setAttribute("results", results);
+    resp.setCharacterEncoding("UTF-8");
+    req.setAttribute("results", results);
+    System.out.println("size"+results.size());
+    System.out.println("size"+resp.toString());
+
+    ServletContext sc = getServletContext();
+    RequestDispatcher rd = sc.getRequestDispatcher("/WEB-INF/jsp/studentList.jsp");
+	rd.forward(req, resp);
+
 	}
 
 	@Override
@@ -57,7 +118,7 @@ public class StudentListServlet extends HttpServlet {
             	case "name" :{
             		specificKey = (String) req.getParameter("name");
             		System.out.println(specificKey);
-            		SQL = "SELECT * FROM STUDENTS WHERE s_name='"+specificKey+"';";
+            		SQL = "SELECT * FROM STUDENTS WHERE s_name like '"+specificKey+"%';";
             		break;
             	}
             	case "year" :{

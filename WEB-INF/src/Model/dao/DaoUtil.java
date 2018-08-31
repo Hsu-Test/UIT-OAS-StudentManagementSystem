@@ -13,7 +13,7 @@ import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
 import javax.sql.DataSource;
 
-import Util.DatabaseException;
+import Model.dbo.DatabaseException;
 
 /**
  * 概略

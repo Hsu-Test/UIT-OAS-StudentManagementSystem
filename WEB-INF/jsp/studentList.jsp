@@ -84,7 +84,7 @@ System.out.println("JSP"+result);
 <br>
 <input type="submit" name="search" value="Search">
 <input type="submit" name="showAll" value="Show All">
-<input id ="back" type="button" name="back" value="Back" onclick="goBack()">
+<input id ="back" type="button" name="back" value="Back" onclick="history.back()">
 
 </form>
 <hr>
@@ -238,7 +238,7 @@ search_key_function();
 
     	var form = document.getElementById('delete');
     	form.method="get";
-    	form.action='welcome.do';
+    	form.action='delete.do';
     	form.submit();
     }
 

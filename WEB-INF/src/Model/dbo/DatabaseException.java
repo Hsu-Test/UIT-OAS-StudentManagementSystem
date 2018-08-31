@@ -3,7 +3,7 @@
  * $Revision$
  * $Date$
  */
-package Util;
+package Model.dbo;
 
 import java.io.IOException;
 

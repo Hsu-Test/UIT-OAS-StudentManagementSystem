@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Util.DatabaseException;
+import Model.dbo.DatabaseException;
 
 @WebServlet(name="StudentList",urlPatterns="/studentList.do")
 public class StudentListServlet extends HttpServlet {
